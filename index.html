@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SudoKuu</title>
+	<link rel="stylesheet" type="text/css" href="Style.css">
+</head>
+<body>
+	
+	<h1>Sudoku</h1>
+
+	<div id="global" >
+		<div id="facil"> Facil</div><br>
+		<div id="medio"> Medio</div><br>
+		<div id="dificil"> Dificil</div>
+	</div>
+
+
+	<div id="ranking">
+
+
+	</div>
+	<input type="button" value="Mostrar" onclick="myFunction()"/>
+</body>
+</html>
+
+
+<script type="text/javascript">
+	var mostra = 'visible';
+	function myFunction() {
+		
+		if(mostra == 'visible')
+		{
+			mostra = 'hidden';
+   			document.getElementById("global").style.visibility = mostra;
+
+		}else{
+			mostra = 'visible';
+			document.getElementById("global").style.visibility = mostra;
+		}
+}
+</script>
