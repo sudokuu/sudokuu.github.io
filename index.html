@@ -7,30 +7,67 @@
 </head>
 <body>
 
-	<h1>Sudoku</h1>
-<!-- MODAL - QUANDO PAUSA O JOGO -->
+	<h1>SudoKuu</h1>
+	<!-- MODAL - QUANDO PAUSA O JOGO -->
 	<div class="modal" id="pausa">
 		<div class="modal-container">
 			<div id="Mstyle">
 				<p style="font-size: 16pt">PAUSADO</p><br>
 				<p style="font-size: 14pt; ">Seu tempo - 00:00</p>
 				<div id="voltar" onclick="location.href='#'">Voltar</div>
-				<div id="Mnovo" onclick="mNovo();location.href='#'" >Novo</div>
+				<div id="Mnovo" onclick="telaInicial();location.href='#'" >Novo</div>
 			</div>
 		</div>
 	</div>
-<!-- INICIO DA PAGINA - PAGINA PRINCIPAL -->
-	<div id="global" >
-		<div id="facil" onclick="myFunction()"> Facil</div><br>
-		<div id="medio" onclick="myFunction()"> Medio</div><br>
-		<div id="dificil" onclick="myFunction()"> Dificil</div>
+
+	<div class="chooser-modal" id="chooser-modal">
+		<div class="chooser-content">
+			<table id="chooser-table">
+				<tr>
+					<td id="1" onclick="chooseNumber(this.id)">
+						1
+					</td>
+					<td id="2" onclick="chooseNumber(this.id)">
+						2
+					</td>
+					<td id="3" onclick="chooseNumber(this.id)">
+						3
+					</td>
+					<td id="4" onclick="chooseNumber(this.id)">
+						4
+					</td>
+					<td id="5" onclick="chooseNumber(this.id)">
+						5
+					</td>
+					<td id="6" onclick="chooseNumber(this.id)">
+						6
+					</td>
+					<td id="7" onclick="chooseNumber(this.id)">
+						7
+					</td>
+					<td id="8" onclick="chooseNumber(this.id)">
+						8
+					</td>
+					<td id="9" onclick="chooseNumber(this.id)">
+						9
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<!-- INICIO DA PAGINA - PAGINA PRINCIPAL -->
+	<div id="menu-dificuldade" >
+		<div id="facil" onclick="novoJogo(0)"> Facil</div><br>
+		<div id="medio" onclick="novoJogo(1)"> Medio</div><br>
+		<div id="dificil" onclick="novoJogo(2)"> Dificil</div>
 	</div>
 
 	<!-- TELA DE JOGO  -->
 
-	<div id="menuinf" style="display: none">
+	<div id="jogo" style="display: none">
 		<div id="tabulacao">
-			<table >
+			<table id="tabela">
 				<tr id="Linha0">
 
 						<td id="a00">
@@ -309,7 +346,7 @@
 			</table>
 		</div>
 		<div id="time">00:00</div>
-		<div id="novo" onclick="novo()">Novo</div>
+		<div id="novo" onclick="telaInicial()">Novo</div>
 		<div id="parar" onclick="location.href='#pausa'">Pausar</div>
 	</div>
 
