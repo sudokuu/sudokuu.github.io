@@ -13,6 +13,7 @@ function novoJogo(dificuldade) {
       for(var j = 0; j < 9; j++) {
           setEventsForCellNamed("a"+ i + j);
           setCellText("a"+ i + j, "");
+		  comparaCelulas("a"+ i + j, "");
       }
   }
 }
@@ -59,10 +60,46 @@ function chooseNumber(number) {
 
     var chooser = document.getElementById("chooser-modal");
     chooser.style.display = "none";
+    //Funcao que verifica o numero recem colocado
+    verificaTabela();
 }
 
 // seta os eventos necessários da celula com o nome passado
 function setEventsForCellNamed(name) {
     var cell = document.getElementById(name);
     cell.onclick = function(){cellClick(cell)};
+}
+
+// Esse metodo recebe uma matrix que vai ficar no lugar de tabelaC
+function verificaTabela(){
+    var tabelaC= [
+        [1, 2, 3, 4, 5, 6, 7, 8, 9],
+        [2, 3, 4, 5, 6, 7, 8, 9, 1],
+        [3, 4, 5, 6, 7, 8, 9, 1, 2],
+        [4, 5, 6, 7, 8, 9, 1, 2, 3],
+        [5, 6, 7, 8, 9, 1, 2, 3, 4],
+        [6, 7, 8, 9, 1, 2, 3, 4, 5],
+        [7, 8, 9, 1, 2, 3, 4, 5, 6],
+        [8, 9, 1, 2, 3, 4, 5, 6, 7],
+        [9, 1, 2, 3, 4, 5, 6, 7, 8]];
+
+    for (var i = 0; i < 9; i++) {
+        for(var j = 0; j < 9; j++){
+            comparaCelulas("a"+i+j, tabelaC[i][j]);
+        }
+    }
+}
+
+function comparaCelulas(userCell, serverCell){
+    var tabelaUsuario = document.getElementById(userCell);
+    if(tabelaUsuario.innerHTML == ""){
+		tabelaUsuario.style.backgroundColor = "white";
+    } else
+    if(tabelaUsuario.innerHTML == serverCell)
+    {
+        tabelaUsuario.style.backgroundColor = "white";
+    }else
+    if(tabelaUsuario.innerHTML != serverCell){
+        tabelaUsuario.style.backgroundColor = "#FF6A6A";
+    }
 }
