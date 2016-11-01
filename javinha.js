@@ -16,6 +16,9 @@ function novoJogo(dificuldade) {
 		  comparaCelulas("a"+ i + j, "");
       }
   }
+
+  // inicia o tempo
+  startTimer();
 }
 
 // exibição da tela inicial
@@ -102,4 +105,38 @@ function comparaCelulas(userCell, serverCell){
     if(tabelaUsuario.innerHTML != serverCell){
         tabelaUsuario.style.backgroundColor = "#FF6A6A";
     }
+}
+
+
+// momento inicial do timer
+var startTime = 0;
+var timerID = 0;
+
+function startTimer() {
+    // guarda o momento inicial
+    startTime = new Date();
+    // faz o primeiro tick
+    tick();
+}
+
+// tick de cada segundo
+function tick() {
+    var now = new Date();
+    var diff = now - startTime;
+    diff = new Date(diff);
+
+    var sec = diff.getSeconds();
+    var min = diff.getMinutes();
+    var hours = diff.getHours()-21;
+
+    if(sec < 10){
+        sec = "0" + sec;
+    }
+    if(min < 10){
+        min = "0" + min;
+    }
+
+    var time = document.getElementById("time");
+    time.innerHTML = hours + ":" + min + ":" + sec;
+    setTimeout("tick()", 1000);
 }
