@@ -13,7 +13,7 @@ function novoJogo(dificuldade) {
       for(var j = 0; j < 9; j++) {
           setEventsForCellNamed("a"+ i + j);
           setCellText("a"+ i + j, "");
-		  comparaCelulas("a"+ i + j, "");
+          celulasBrancas("a"+ i + j);
       }
   }
 
@@ -63,9 +63,9 @@ function chooseNumber(number) {
 
     var chooser = document.getElementById("chooser-modal");
     chooser.style.display = "none";
-    //Funcao que verifica o numero recem colocado
-    verificaTabela();
+    verifyTable(number);
 }
+
 
 // seta os eventos necessários da celula com o nome passado
 function setEventsForCellNamed(name) {
@@ -73,7 +73,46 @@ function setEventsForCellNamed(name) {
     cell.onclick = function(){cellClick(cell)};
 }
 
-// Esse metodo recebe uma matrix que vai ficar no lugar de tabelaC
+function verifyTable(valor){
+    var linha = selectedCell.charAt(1);
+    var coluna = selectedCell.charAt(2);
+    var cont = 0;
+    for(var i = 0; i < 9; i++)
+    {
+        //verifica a linha
+        if(selectedCell != ("a"+linha+i))
+        {
+            cont = cont + verificaLinha("a"+linha+i,valor);
+        }
+        if(selectedCell != ("a"+i+coluna))
+        {
+            cont = cont + verificaColuna("a"+i+coluna,valor);
+        }
+    }
+    if(cont == 0){
+        document.getElementById(selectedCell).style.backgroundColor = "white";
+    }
+    window.console.log(cont);
+}
+function verificaLinha (id, valor){
+    var celula = document.getElementById(id);
+    if(celula.innerHTML == valor){
+        document.getElementById(selectedCell).style.backgroundColor = "#FF6A6A";
+        return 1;
+    }else {
+        return 0;
+    }
+}
+function verificaColuna (id, valor){
+    var celula = document.getElementById(id);
+    if(celula.innerHTML == valor){
+        document.getElementById(selectedCell).style.backgroundColor = "#FF6A6A";
+        return 1;
+    }else {
+        return 0;
+    }
+}
+/*// Esse metodo recebe uma matrix que vai ficar no lugar de tabelaC
 function verificaTabela(){
     var tabelaC= [
         [1, 2, 3, 4, 5, 6, 7, 8, 9],
@@ -94,19 +133,25 @@ function verificaTabela(){
 }
 
 function comparaCelulas(userCell, serverCell){
-    var tabelaUsuario = document.getElementById(userCell);
-    if(tabelaUsuario.innerHTML == ""){
-		tabelaUsuario.style.backgroundColor = "white";
+    var celulaUsuario = document.getElementById(userCell);
+    if(celulaUsuario.innerHTML == ""){
+		celulaUsuario.style.backgroundColor = "white";
     } else
-    if(tabelaUsuario.innerHTML == serverCell)
+    if(celulaUsuario.innerHTML == serverCell)
     {
-        tabelaUsuario.style.backgroundColor = "white";
+        celulaUsuario.style.backgroundColor = "white";
     }else
-    if(tabelaUsuario.innerHTML != serverCell){
-        tabelaUsuario.style.backgroundColor = "#FF6A6A";
+    if(celulaUsuario.innerHTML != serverCell){
+        celulaUsuario.style.backgroundColor = "#FF6A6A";
     }
 }
+*/
 
+function celulasBrancas (userCell){
+    if(document.getElementById(userCell).innerHTML == ""){
+		document.getElementById(userCell).style.backgroundColor = "white";
+    }
+}
 
 // momento inicial do timer
 var startTime = 0;
@@ -127,7 +172,7 @@ function tick() {
 
     var sec = diff.getSeconds();
     var min = diff.getMinutes();
-    var hours = diff.getHours()-21;
+    var hours = diff.getHours()-22;
 
     if(sec < 10){
         sec = "0" + sec;
