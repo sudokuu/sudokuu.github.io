@@ -59,14 +59,33 @@
 
 	<!-- INICIO DA PAGINA - PAGINA PRINCIPAL -->
 	<div id="menu-dificuldade" >
-		<div id="facil" onclick="novoJogo(0)"> Facil</div><br>
-		<div id="medio" onclick="novoJogo(1)"> Medio</div><br>
-		<div id="dificil" onclick="novoJogo(2)"> Dificil</div>
+		<div id="facil" onclick="novoJogo(0)"> F&aacute;cil</div><br>
+		<div id="medio" onclick="novoJogo(1)"> M&eacute;dio</div><br>
+		<div id="dificil" onclick="novoJogo(2)"> Dif&iacute;cil</div><br>
+		<div class="tooltip" id="idiota">+
+			<span class="tooltiptext"><strong>Qual objetivo do jogo?</strong> <br>
+				<br> O objetivo &eacute; a coloca&ccedil;&atilde;o de n&uacute;meros de 1 a 9 em cada
+				<br>uma das c&eacute;lulas vazias
+				<br>na grade 9x9, a grade 9x9 &eacute; constitu&iacute;da por 3x3 subgrades chamadas regi&otilde;es.
+				<br><br><strong>Como resolver o jogo?
+				</strong><br><br>O quebra-cabe&ccedil;a cont&eacute;m
+				<br>algumas pistas iniciais, que<br>s&atilde;o n&uacute;meros inseridos
+				<br>em algumas c&eacute;lulas, de maneira
+				<br>a permitir uma indu&ccedil;&atilde;o ou
+				<br>dedu&ccedil;&atilde;o dos n&uacute;meros
+				<br>em c&eacute;lulas que estejam vazias.
+				<br>Cada coluna, linha e regi&atilde;o s&oacute;
+				<br>pode ter um n&uacute;mero de cada
+				<br>dos 1 a 9.
+
+			</span>
+		</div>
 	</div>
 
 	<!-- TELA DE JOGO  -->
 
 	<div id="jogo" style="display: none">
+		<div id="infodificuldade"> </div><br>
 		<div id="tabulacao">
 			<table id="tabela">
 				<tr id="Linha0">
@@ -181,7 +200,26 @@
 		</div>
 		<div id="time">00:00</div>
 		<div id="novo" onclick="telaInicial()">Novo</div>
+		<div class="tooltip" id="idiota">+
+			<span class="tooltiptext"><strong>Qual objetivo do jogo?</strong> <br>
+				<br> O objetivo &eacute; a coloca&ccedil;&atilde;o de n&uacute;meros de 1 a 9 em cada
+				<br>uma das c&eacute;lulas vazias
+				<br>na grade 9x9, a grade 9x9 &eacute; constitu&iacute;da por 3x3 subgrades chamadas regi&otilde;es.
+				<br><br><strong>Como resolver o jogo?
+				</strong><br><br>O quebra-cabe&ccedil;a cont&eacute;m
+				<br>algumas pistas iniciais, que<br>s&atilde;o n&uacute;meros inseridos
+				<br>em algumas c&eacute;lulas, de maneira
+				<br>a permitir uma indu&ccedil;&atilde;o ou
+				<br>dedu&ccedil;&atilde;o dos n&uacute;meros
+				<br>em c&eacute;lulas que estejam vazias.
+				<br>Cada coluna, linha e regi&atilde;o s&oacute;
+				<br>pode ter um n&uacute;mero de cada
+				<br>dos 1 a 9.
+
+			</span>
+		</div>
 		<div id="parar" onclick="location.href='#pausa'">Pausar</div>
+
 	</div>
 
 	<div id="rank">
@@ -195,6 +233,5 @@
 			<div id="Rpos5"> 5</div>
 		</div>
 	</div>
-
 </body>
 </html>

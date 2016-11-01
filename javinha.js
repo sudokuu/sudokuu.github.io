@@ -4,17 +4,32 @@
 // 1 - medio
 // 2 - dificil
 function novoJogo(dificuldade) {
+    //Mostra ao usuário a dificuldade em que ele está jogando
+    switch (dificuldade) {
+        case 0:
+            document.getElementById("infodificuldade").innerHTML = "N&iacute;vel: F&aacute;cil";
+        break;
+        case 1:
+            document.getElementById("infodificuldade").innerHTML = "N&iacute;vel: M&eacute;dio";
+        break;
+        case 2:
+            document.getElementById("infodificuldade").innerHTML = "N&iacute;vel: Dif&iacute;cil";
+        break;
+    }
 
-  document.getElementById("menu-dificuldade").style.display = "none";
-  document.getElementById("jogo").style.display = "block";
+    document.getElementById("menu-dificuldade").style.display = "none";
+    document.getElementById("jogo").style.display = "block";
 
-  // pega a tabela do jogo e coloca os eventos necessários e LIMPA todas as celulas
-  for (var i = 0; i < 9; i++) {
-      for(var j = 0; j < 9; j++) {
-          setEventsForCellNamed("a"+ i + j);
-          setCellText("a"+ i + j, "");
-      }
-  }
+    // pega a tabela do jogo e coloca os eventos necessários e LIMPA todas as celulas
+    for (var i = 0; i < 9; i++) {
+        for(var j = 0; j < 9; j++) {
+            setEventsForCellNamed("a"+ i + j);
+            setCellText("a"+ i + j, "");
+            celulasBrancas("a"+ i + j);
+        }
+    }
+    // inicia o tempo
+    startTimer();
 }
 
 // exibição da tela inicial
@@ -59,9 +74,9 @@ function chooseNumber(number) {
 
     var chooser = document.getElementById("chooser-modal");
     chooser.style.display = "none";
-    //Funcao que verifica o numero recem colocado
-    verificaTabela();
+    verifyTable(number);
 }
+
 
 // seta os eventos necessários da celula com o nome passado
 function setEventsForCellNamed(name) {
@@ -69,35 +84,81 @@ function setEventsForCellNamed(name) {
     cell.onclick = function(){cellClick(cell)};
 }
 
-// Esse metodo recebe uma matrix que vai ficar no lugar de tabelaC
-function verificaTabela(){
-    var tabelaC= [
-        [1, 2, 3, 4, 5, 6, 7, 8, 9],
-        [2, 3, 4, 5, 6, 7, 8, 9, 1],
-        [3, 4, 5, 6, 7, 8, 9, 1, 2],
-        [4, 5, 6, 7, 8, 9, 1, 2, 3],
-        [5, 6, 7, 8, 9, 1, 2, 3, 4],
-        [6, 7, 8, 9, 1, 2, 3, 4, 5],
-        [7, 8, 9, 1, 2, 3, 4, 5, 6],
-        [8, 9, 1, 2, 3, 4, 5, 6, 7],
-        [9, 1, 2, 3, 4, 5, 6, 7, 8]];
-
-    for (var i = 0; i < 9; i++) {
-        for(var j = 0; j < 9; j++){
-            comparaCelulas("a"+i+j, tabelaC[i][j]);
+function verifyTable(valor){
+    var linha = selectedCell.charAt(1);
+    var coluna = selectedCell.charAt(2);
+    var cont = 0;
+    for(var i = 0; i < 9; i++)
+    {
+        //verifica a linha
+        if(selectedCell != ("a"+linha+i))
+        {
+            cont = cont + verificaLinha("a"+linha+i,valor);
         }
+        if(selectedCell != ("a"+i+coluna))
+        {
+            cont = cont + verificaColuna("a"+i+coluna,valor);
+        }
+    }
+    if(cont == 0){
+        document.getElementById(selectedCell).style.backgroundColor = "white";
+    }
+    window.console.log(cont);
+}
+function verificaLinha (id, valor){
+    var celula = document.getElementById(id);
+    if(celula.innerHTML == valor){
+        document.getElementById(selectedCell).style.backgroundColor = "#FF6A6A";
+        return 1;
+    }else {
+        return 0;
+    }
+}
+function verificaColuna (id, valor){
+    var celula = document.getElementById(id);
+    if(celula.innerHTML == valor){
+        document.getElementById(selectedCell).style.backgroundColor = "#FF6A6A";
+        return 1;
+    }else {
+        return 0;
     }
 }
 
-function comparaCelulas(userCell, serverCell){
-    var tabelaUsuario = document.getElementById(userCell);
-    if(tabelaUsuario.innerHTML == ""){
-    } else
-    if(tabelaUsuario.innerHTML == serverCell)
-    {
-        tabelaUsuario.style.backgroundColor = "white";
-    }else
-    if(tabelaUsuario.innerHTML != serverCell){
-        tabelaUsuario.style.backgroundColor = "#FF6A6A";
+function celulasBrancas (userCell){
+    if(document.getElementById(userCell).innerHTML == ""){
+		document.getElementById(userCell).style.backgroundColor = "white";
     }
+}
+
+// momento inicial do timer
+var startTime = 0;
+var timerID = 0;
+
+function startTimer() {
+    // guarda o momento inicial
+    startTime = new Date();
+    // faz o primeiro tick
+    tick();
+}
+
+// tick de cada segundo
+function tick() {
+    var now = new Date();
+    var diff = now - startTime;
+    diff = new Date(diff);
+
+    var sec = diff.getSeconds();
+    var min = diff.getMinutes();
+    var hours = diff.getHours()-22;
+
+    if(sec < 10){
+        sec = "0" + sec;
+    }
+    if(min < 10){
+        min = "0" + min;
+    }
+
+    var time = document.getElementById("time");
+    time.innerHTML = hours + ":" + min + ":" + sec;
+    setTimeout("tick()", 1000);
 }
