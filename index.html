@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SudoKuu</title>
+	<link rel="stylesheet" type="text/css" href="Style.css">
+	<script src="javinha.js"> </script>
+</head>
+<body>
+
+	<h1>SudoKuu</h1>
+
+	<!-- MODAL - QUANDO PAUSA O JOGO -->
+	<div class="modal" id="pausa">
+		<div class="modal-container">
+			<div id="Mstyle">
+				<p style="font-size: 16pt">PAUSADO</p><br>
+				<p style="font-size: 14pt; ">Seu tempo - 00:00</p>
+				<div id="voltar" onclick="location.href='#'">Voltar</div>
+				<div id="Mnovo" onclick="telaInicial();location.href='#'" >Novo</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="chooser-modal" id="chooser-modal">
+		<div class="chooser-content">
+			<table id="chooser-table">
+				<tr>
+					<td id="1" onclick="chooseNumber(this.id)">
+						1
+					</td>
+					<td id="2" onclick="chooseNumber(this.id)">
+						2
+					</td>
+					<td id="3" onclick="chooseNumber(this.id)">
+						3
+					</td>
+					<td id="4" onclick="chooseNumber(this.id)">
+						4
+					</td>
+					<td id="5" onclick="chooseNumber(this.id)">
+						5
+					</td>
+					<td id="6" onclick="chooseNumber(this.id)">
+						6
+					</td>
+					<td id="7" onclick="chooseNumber(this.id)">
+						7
+					</td>
+					<td id="8" onclick="chooseNumber(this.id)">
+						8
+					</td>
+					<td id="9" onclick="chooseNumber(this.id)">
+						9
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<!-- INICIO DA PAGINA - PAGINA PRINCIPAL -->
+	<div id="menu-dificuldade" >
+		<div id="facil" onclick="novoJogo(0)"> Facil</div><br>
+		<div id="medio" onclick="novoJogo(1)"> Medio</div><br>
+		<div id="dificil" onclick="novoJogo(2)"> Dificil</div>
+	</div>
+
+	<!-- TELA DE JOGO  -->
+
+	<div id="jogo" style="display: none">
+		<div id="tabulacao">
+			<table id="tabela">
+				<tr id="Linha0">
+					<td id="a00"></td>
+					<td id="a01"></td>
+					<td id="a02"></td>
+					<td id="a03"></td>
+					<td id="a04"></td>
+					<td id="a05"></td>
+					<td id="a06"></td>
+					<td id="a07"></td>
+					<td id="a08"></td>
+				</tr>
+				<tr id="Linha1">
+					<td id="a10"></td>
+					<td id="a11"></td>
+					<td id="a12"></td>
+					<td id="a13"></td>
+					<td id="a14"></td>
+					<td id="a15"></td>
+					<td id="a16"></td>
+					<td id="a17"></td>
+					<td id="a18"></td>
+				</tr>
+				<tr id="Linha2">
+					<td id="a20"></td>
+					<td id="a21"></td>
+					<td id="a22"></td>
+					<td id="a23"></td>
+					<td id="a24"></td>
+					<td id="a25"></td>
+					<td id="a26"></td>
+					<td id="a27"></td>
+					<td id="a28"></td>
+				</tr>
+
+				<tr id="Linha3">
+					<td id="a30"></td>
+					<td id="a31"></td>
+					<td id="a32"></td>
+					<td id="a33"></td>
+					<td id="a34"></td>
+					<td id="a35"></td>
+					<td id="a36"></td>
+					<td id="a37"></td>
+					<td id="a38"></td>
+				</tr>
+
+
+				<tr id="Linha4">
+					<td id="a40"></td>
+					<td id="a41"></td>
+					<td id="a42"></td>
+					<td id="a43"></td>
+					<td id="a44"></td>
+					<td id="a45"></td>
+					<td id="a46"></td>
+					<td id="a47"></td>
+					<td id="a48"></td>
+				</tr>
+
+				<tr id="Linha5">
+					<td id="a50"></td>
+					<td id="a51"></td>
+					<td id="a52"></td>
+					<td id="a53"></td>
+					<td id="a54"></td>
+					<td id="a55"></td>
+					<td id="a56"></td>
+					<td id="a57"></td>
+					<td id="a58"></td>
+				</tr>
+
+
+				<tr id="Linha6">
+					<td id="a60"></td>
+					<td id="a61"></td>
+					<td id="a62"></td>
+					<td id="a63"></td>
+					<td id="a64"></td>
+					<td id="a65"></td>
+					<td id="a66"></td>
+					<td id="a67"></td>
+					<td id="a68"></td>
+				</tr>
+
+
+				<tr id="Linha7">
+					<td id="a70"></td>
+					<td id="a71"></td>
+					<td id="a72"></td>
+					<td id="a73"></td>
+					<td id="a74"></td>
+					<td id="a75"></td>
+					<td id="a76"></td>
+					<td id="a77"></td>
+					<td id="a78"></td>
+				</tr>
+
+				<tr id="Linha8">
+					<td id="a80"></td>
+					<td id="a81"></td>
+					<td id="a82"></td>
+					<td id="a83"></td>
+					<td id="a84"></td>
+					<td id="a85"></td>
+					<td id="a86"></td>
+					<td id="a87"></td>
+					<td id="a88"></td>
+				</tr>
+			</table>
+		</div>
+		<div id="time">00:00</div>
+		<div id="novo" onclick="telaInicial()">Novo</div>
+		<div id="parar" onclick="location.href='#pausa'">Pausar</div>
+	</div>
+
+	<div id="rank">
+		<div id="Rstyle">
+
+			<p id="Rtitle">Ranking</p>
+			<div id="Rpos1"> 1</div>
+			<div id="Rpos2"> 2</div>
+			<div id="Rpos3"> 3</div>
+			<div id="Rpos4"> 4</div>
+			<div id="Rpos5"> 5</div>
+		</div>
+	</div>
+
+</body>
+</html>
