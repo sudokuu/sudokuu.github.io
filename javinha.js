@@ -30,7 +30,7 @@ function novoJogo(dificuldade) {
     // }
 
     // pega o jogo
-    $.get("cgi-bin/sudokuu.py", function(response) {
+    $.get("cgi-bin/sudokuu.py?dificuldade=" + dificuldade, function(response) {
 
         var linha = 0;
         var caractere = 0;
@@ -193,7 +193,7 @@ function tick() {
 
     var sec = diff.getSeconds();
     var min = diff.getMinutes();
-    var hours = diff.getHours()-22;
+    var hours = diff.getHours()-21;
 
     if(sec < 10){
         sec = "0" + sec;
