@@ -20,15 +20,6 @@ function novoJogo(dificuldade) {
     document.getElementById("menu-dificuldade").style.display = "none";
     document.getElementById("jogo").style.display = "block";
 
-    // pega a tabela do jogo e coloca os eventos necessários e LIMPA todas as celulas
-    // for (var i = 0; i < 9; i++) {
-    //     for(var j = 0; j < 9; j++) {
-    //         setEventsForCellNamed("a"+ i + j);
-    //         setCellText("a"+ i + j, "");
-    //         celulasBrancas("a"+ i + j);
-    //     }
-    // }
-
     // pega o jogo
     $.get("cgi-bin/sudokuu.py?dificuldade=" + dificuldade, function(response) {
 
@@ -64,6 +55,7 @@ function novoJogo(dificuldade) {
                   if(jogo[i][j] == 0)
                   {
                       setCellText("a"+ i + j, "");
+                      celulasBrancas("a"+ i + j);
                   }
                   else
                   {
