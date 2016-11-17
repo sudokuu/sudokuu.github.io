@@ -25,3 +25,8 @@ A chamada para o script tem apenas um argumento, a **dificuldade**, que é um n�
 sudokuu.py?dificuldade=0
 ```
 Os números **0**, **1** e **2** representam as dificuldades **fácil**, **médio** e **difícil**, respectivamente.
+
+Exemplo chamada com dificuldade difícil:
+```
+sudokuu.py?dificuldade=2
+```
