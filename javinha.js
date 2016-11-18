@@ -5,20 +5,68 @@
 // 2 - dificil
 function novoJogo(dificuldade) {
 
-  document.getElementById("menu-dificuldade").style.display = "none";
-  document.getElementById("jogo").style.display = "block";
+    //Mostra ao usuário a dificuldade em que ele está jogando
+    switch (dificuldade) {
+        case 0:
+            document.getElementById("infodificuldade").innerHTML = "N&iacute;vel: F&aacute;cil";
+        break;
+        case 1:
+            document.getElementById("infodificuldade").innerHTML = "N&iacute;vel: M&eacute;dio";
+        break;
+        case 2:
+            document.getElementById("infodificuldade").innerHTML = "N&iacute;vel: Dif&iacute;cil";
+        break;
+    }
 
-  // pega a tabela do jogo e coloca os eventos necessários e LIMPA todas as celulas
-  for (var i = 0; i < 9; i++) {
-      for(var j = 0; j < 9; j++) {
-          setEventsForCellNamed("a"+ i + j);
-          setCellText("a"+ i + j, "");
-          celulasBrancas("a"+ i + j);
-      }
-  }
+    document.getElementById("menu-dificuldade").style.display = "none";
+    document.getElementById("jogo").style.display = "block";
 
-  // inicia o tempo
-  startTimer();
+    // pega o jogo
+    $.get("cgi-bin/sudokuu.py?dificuldade=" + dificuldade, function(response) {
+
+        var linha = 0;
+        var caractere = 0;
+
+        var jogo = [
+            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0]];
+
+        for(var i = 0; i < response.length; i++) {
+            if (response[i] == '\n') {
+                  linha++;
+                  caractere = 0;
+            }
+            else {
+                  jogo[linha][caractere] = response[i];
+                  caractere++;
+            }
+        }
+
+        //pega a tabela do jogo e coloca os eventos necessários e LIMPA todas as celulas
+        for (var i = 0; i < 9; i++) {
+            for(var j = 0; j < 9; j++) {
+                  setEventsForCellNamed("a"+ i + j);
+                  if(jogo[i][j] == 0)
+                  {
+                      setCellText("a"+ i + j, "");
+                      celulasBrancas("a"+ i + j);
+                  }
+                  else
+                  {
+                      setCellText("a"+ i + j, jogo[i][j]);
+                  }
+            }
+        }
+
+        startTimer();
+    });
 }
 
 // exibição da tela inicial
@@ -112,6 +160,7 @@ function verificaColuna (id, valor){
         return 0;
     }
 }
+
 /*// Esse metodo recebe uma matrix que vai ficar no lugar de tabelaC
 function verificaTabela(){
     var tabelaC= [
@@ -172,7 +221,7 @@ function tick() {
 
     var sec = diff.getSeconds();
     var min = diff.getMinutes();
-    var hours = diff.getHours()-22;
+    var hours = diff.getHours()-21;
 
     if(sec < 10){
         sec = "0" + sec;
