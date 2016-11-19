@@ -230,54 +230,6 @@ table{
 }
 
 /*
-PAGINA MOSTRADA SEMPRE
-*/
-
-#Rstyle{
-	margin-top: 30px;
-	font-size: 200%;
-
-	width: 400px;
-	display: inline-block;
-
-	border-style: solid;
-	border-color: black;
-	border-radius: 8px;
-}
-
-#Rtitle{
-	border-bottom: solid;
-	border-color: black;
-}
-
-#Rpos1{
-		border-top: solid;
-		border-color: black;
-		padding: 10px;
-		margin-top: 10px;
-		font-size: 20pt;
-
-}
-#Rpos2{
-		padding: 10px;
-		font-size: 20pt;
-		background-color:#EEE9E9;
-}
-#Rpos3{
-		padding: 10px;
-		font-size: 20pt;
-}
-#Rpos4{
-		padding: 10px;
-		font-size: 20pt;
-		background-color:#EEE9E9;
-}
-#Rpos5{
-		padding: 10px;
-		font-size: 20pt;
-}
-
-/*
 MODAL PAGINA
 */
 p{
@@ -352,11 +304,6 @@ p{
 }
 #Mnovo:hover{
 	cursor: pointer;
-}
-
-
-#rank{
-	text-align: center;
 }
 
 .chooser-modal{
