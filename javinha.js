@@ -43,7 +43,7 @@ function novoJogo(dificuldade) {
     document.getElementById("jogo").style.display = "block";
 
     // pega o jogo
-    $.get("cgi-bin/sudokuu.py?dificuldade=" + dificuldade, function(response) {
+    $.get("http://ec2-52-67-171-250.sa-east-1.compute.amazonaws.com/cgi-bin/sudokuu.py?dificuldade=" + dificuldade, function(response) {
 
         var linha = 0;
         var caractere = 0;
