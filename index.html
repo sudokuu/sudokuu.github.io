@@ -15,8 +15,8 @@
 		<div class="modal-container">
 			<div id="Mstyle">
 				<p style="font-size: 16pt">PAUSADO</p><br>
-				<p style="font-size: 14pt; ">Seu tempo - 00:00</p>
-				<div id="voltar" onclick="location.href='#'">Voltar</div>
+				<p id="tempoPausa" style="font-size: 14pt; ">Seu tempo - 00:00</p>
+				<div id="voltar" onclick="continuar();location.href='#'">Voltar</div>
 				<div id="Mnovo" onclick="telaInicial();location.href='#'" >Novo</div>
 			</div>
 		</div>
@@ -63,7 +63,7 @@
 		<div id="facil" onclick="novoJogo(0)"> F&aacute;cil</div><br>
 		<div id="medio" onclick="novoJogo(1)"> M&eacute;dio</div><br>
 		<div id="dificil" onclick="novoJogo(2)"> Dif&iacute;cil</div><br>
-		<div class="tooltip" id="idiota">+
+		<div class="tooltip" id="idiota">???
 			<span class="tooltiptext"><strong>Qual objetivo do jogo?</strong> <br>
 				<br> O objetivo &eacute; a coloca&ccedil;&atilde;o de n&uacute;meros de 1 a 9 em cada
 				<br>uma das c&eacute;lulas vazias
@@ -201,7 +201,7 @@
 		</div>
 		<div id="time">00:00</div>
 		<div id="novo" onclick="telaInicial()">Novo</div>
-		<div class="tooltip" id="idiota">+
+		<div class="tooltip" id="idiota">???
 			<span class="tooltiptext"><strong>Qual objetivo do jogo?</strong> <br>
 				<br> O objetivo &eacute; a coloca&ccedil;&atilde;o de n&uacute;meros de 1 a 9 em cada
 				<br>uma das c&eacute;lulas vazias
@@ -219,7 +219,7 @@
 
 			</span>
 		</div>
-		<div id="parar" onclick="location.href='#pausa'">Pausar</div>
+		<div id="parar" onclick="location.href='#pausa';mostraTempo()">Pausar</div>
 	</div>
 
 	<div id="rank">

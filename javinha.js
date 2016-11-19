@@ -3,6 +3,21 @@
 
 var varDificuldade;
 
+// estado
+var pausado = 0;
+
+//Tabela Completo
+var tabelaCompleto = [
+    [1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1]];
+
 // inicia um novo jogo com a dificuldade indicada
 // 0 - facil
 // 1 - medio
@@ -72,6 +87,10 @@ function novoJogo(dificuldade) {
         }
 
         startTimer();
+        pausado = 0;
+
+        // primeiro tick
+        tick();
     });
 }
 
@@ -136,21 +155,9 @@ function parabens (){
 function verifyTableIsCorrect(completo){
     if(completo == 1)
     {
-        //Tabela Exemplo - Isso aqui tem vira o jogo real
-        var tabelaExemplo = [
-            [1, 1, 1, 1, 1, 1, 1, 1, 1],
-            [1, 1, 1, 1, 1, 1, 1, 1, 1],
-            [1, 1, 1, 1, 1, 1, 1, 1, 1],
-            [1, 1, 1, 1, 1, 1, 1, 1, 1],
-            [1, 1, 1, 1, 1, 1, 1, 1, 1],
-            [1, 1, 1, 1, 1, 1, 1, 1, 1],
-            [1, 1, 1, 1, 1, 1, 1, 1, 1],
-            [1, 1, 1, 1, 1, 1, 1, 1, 1],
-            [1, 1, 1, 1, 1, 1, 1, 1, 1]];
-
         for(var i = 0; i < 9; i ++){
             for(var j = 0; j < 9; j ++){
-                if(document.getElementById("a"+i+j).innerHTML != tabelaExemplo[i][j]){
+                if(document.getElementById("a"+i+j).innerHTML != tabelaCompleto[i][j]){
                     return 0;
                 }
             }
@@ -183,19 +190,7 @@ function verifyTable(valor, varSelectedCell){
 
     //Se estiver com a dificuldade facil irá vir para aqui
     if(varDificuldade == 0){
-        //Tabela Exemplo - Isso aqui tem vira o jogo real
-        var tabelaExemplo = [
-            [1, 1, 1, 1, 1, 1, 1, 1, 1],
-            [1, 1, 1, 1, 1, 1, 1, 1, 1],
-            [1, 1, 1, 1, 1, 1, 1, 1, 1],
-            [1, 1, 1, 1, 1, 1, 1, 1, 1],
-            [1, 1, 1, 1, 1, 1, 1, 1, 1],
-            [1, 1, 1, 1, 1, 1, 1, 1, 1],
-            [1, 1, 1, 1, 1, 1, 1, 1, 1],
-            [1, 1, 1, 1, 1, 1, 1, 1, 1],
-            [1, 1, 1, 1, 1, 1, 1, 1, 1]];
-
-        if(document.getElementById(selectedCell).innerHTML == tabelaExemplo[linha][coluna]){
+        if(document.getElementById(selectedCell).innerHTML == tabelaCompleto[linha][coluna]){
             document.getElementById(selectedCell).style.backgroundColor = "white";
         }else
             document.getElementById(selectedCell).style.backgroundColor = "#FF6A6A";
@@ -396,31 +391,67 @@ function celulasBrancas (userCell){
 var startTime = 0;
 var timerID = 0;
 
+// guarda o momento da pausa pra diminuir e continuar depois
+var pausaTime;
+
 function startTimer() {
     // guarda o momento inicial
     startTime = new Date();
-    // faz o primeiro tick
-    tick();
 }
 
 // tick de cada segundo
 function tick() {
+    if(pausado == 0) {
+        var now = new Date();
+        var diff = now - startTime;
+        diff = new Date(diff);
+
+        var sec = diff.getSeconds();
+        var min = diff.getMinutes();
+        var hours = diff.getHours()-21;
+
+        if(sec < 10){
+            sec = "0" + sec;
+        }
+        if(min < 10){
+            min = "0" + min;
+        }
+
+        var time = document.getElementById("time");
+        time.innerHTML = hours + ":" + min + ":" + sec;
+        setTimeout("tick()", 1000);
+    }
+}
+
+// pausa o relógio do jogo
+function pausa() {
+    // guarda o momento
+    pausaTime = new Date();
+
+    pausado = 1;
+}
+
+// continua o jogo, volta a contar o relógio
+function continuar() {
     var now = new Date();
-    var diff = now - startTime;
-    diff = new Date(diff);
+    // pega o tempo total de pausa
+    var diff = now.getTime() - pausaTime.getTime() + startTime.getTime();
+    startTime = new Date(diff);
 
-    var sec = diff.getSeconds();
-    var min = diff.getMinutes();
-    var hours = diff.getHours()-21;
+    pausado = 0;
+    // volta a contar
+    tick();
+}
 
-    if(sec < 10){
-        sec = "0" + sec;
+// mostra o tempo no modal
+function mostraTempo() {
+    if($('#tempoPausa').is(':visible'))
+    {
+        // pausa o jogo
+        pausa();
+
+        // pega o tempo e coloca no modal
+        var time = document.getElementById("time").innerHTML;
+        $('#tempoPausa').html("Seu tempo: " + time);
     }
-    if(min < 10){
-        min = "0" + min;
-    }
-
-    var time = document.getElementById("time");
-    time.innerHTML = hours + ":" + min + ":" + sec;
-    setTimeout("tick()", 1000);
 }
