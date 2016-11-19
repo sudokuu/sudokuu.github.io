@@ -8,15 +8,15 @@ var pausado = 0;
 
 //Tabela Completo
 var tabelaCompleto = [
-    [1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1]];
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0]];
 
 // inicia um novo jogo com a dificuldade indicada
 // 0 - facil
@@ -59,14 +59,27 @@ function novoJogo(dificuldade) {
             [0, 0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 0]];
 
+
         for(var i = 0; i < response.length; i++) {
-            if (response[i] == '\n') {
-                  linha++;
-                  caractere = 0;
+            if(linha < 9) {
+                if (response[i] == '\n') {
+                      linha++;
+                      caractere = 0;
+                }
+                else {
+                      jogo[linha][caractere] = response[i];
+                      caractere++;
+                }
             }
             else {
-                  jogo[linha][caractere] = response[i];
-                  caractere++;
+                if (response[i] == '\n') {
+                      linha++;
+                      caractere = 0;
+                }
+                else {
+                      tabelaCompleto[linha-9][caractere] = response[i];
+                      caractere++;
+                }
             }
         }
 
@@ -148,7 +161,36 @@ function chooseNumber(number) {
 }
 //Dá parabens para o jogador ARRUMA AS PARADAS
 function parabens (){
-    window.console.log("Kongratulatio may liro friendlye");
+    var parabens = document.getElementById("parabens");
+    parabens.style.display = "block";
+
+    pausado = 1;
+
+    if($('#tempoVitoria').is(':visible'))
+    {
+        var time = document.getElementById("time").innerHTML;
+        $('#tempoVitoria').html(time);
+
+        var nivel;
+        switch (varDificuldade) {
+            case 0:
+                nivel = "F&aacute;cil";
+            break;
+            case 1:
+                nivel = "M&eacute;dio";
+            break;
+            case 2:
+                nivel = "Dif&iacute;cil";
+            break;
+        }
+
+        $('#nivelVitoria').html(nivel);
+    }
+}
+
+function escondeParabens() {
+    var parabens = document.getElementById("parabens");
+    parabens.style.display = "none";
 }
 
 //verifica se o jogo está correto - Se estiver ele chama função parabens

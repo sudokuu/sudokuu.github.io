@@ -11,6 +11,13 @@ h1{
 	font-family: Georgia;
 }
 
+h2{
+	text-align:center;
+	margin-top: 20px;
+	font-size: 24pt;
+	font-family: Georgia;
+}
+
 img{
 	margin-top: 20px;
 }
@@ -321,6 +328,14 @@ p{
 .chooser-content{
 	position:fixed;
 	left: 36%;
+	background-color: #FFFFFF;
+}
+
+.parabens-content{
+	margin: auto;
+    width: 50%;
+	height: 25%;
+	text-align: center;
 	background-color: #FFFFFF;
 }
 
