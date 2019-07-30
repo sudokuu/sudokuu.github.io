@@ -14,5 +14,5 @@ O objetivo do jogo é colocação de números de 1 a 9 em cada uma das células 
 
 ## Quem?
 
-- [Felipe Pereira da Silva](https://github.com/felipehendrix)
+- [Felipe Pereira da Silva](https://github.com/felipepsilva)
 - [Hugarty Pedro](https://github.com/hugarty)
